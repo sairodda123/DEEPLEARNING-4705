@@ -1,0 +1,25 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# y = 3x + 2 (target)
+X = np.linspace(0, 10, 50)
+y = 3 * X + 2 + np.random.randn(50)
+
+# Initialize weights
+m, c = 0, 0
+lr = 0.01
+
+# Gradient Descent
+for i in range(500):
+    y_pred = m * X + c
+    dm = (-2/len(X)) * sum(X * (y - y_pred))
+    dc = (-2/len(X)) * sum(y - y_pred)
+    m -= lr * dm
+    c -= lr * dc
+
+print(f"Learned parameters: m={m:.2f}, c={c:.2f}")
+
+# Plot
+plt.scatter(X, y, color='blue')
+plt.plot(X, m*X+c, color='red')
+plt.show()
